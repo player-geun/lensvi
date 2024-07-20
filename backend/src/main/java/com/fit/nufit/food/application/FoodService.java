@@ -8,6 +8,7 @@ import com.fit.nufit.food.dto.request.FoodCreateRequest;
 import com.fit.nufit.food.dto.request.FoodNutrientCreateRequest;
 import com.fit.nufit.food.dto.response.FoodResponse;
 import com.fit.nufit.food.dto.response.NutrientDetailResponse;
+import com.fit.nufit.food.dto.response.SearchFoodResponse;
 import com.fit.nufit.meal.domain.MealDetail;
 import com.fit.nufit.meal.domain.MealDetailRepository;
 import com.fit.nufit.member.domain.MemberRepository;
@@ -126,7 +127,7 @@ public class FoodService {
                 .collect(Collectors.toList());
     }
 
-    public List<String> getFoodNamesBySearchWord(String searchWord) {
+    public List<SearchFoodResponse> getFoodNamesBySearchWord(String searchWord) {
         PageRequest pageRequest = PageRequest.of(0, 10);
         return foodRepository.getFoodNamesBySearchWord(searchWord, pageRequest);
     }

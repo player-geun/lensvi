@@ -1,5 +1,6 @@
 package com.fit.nufit.food.domain;
 
+import com.fit.nufit.food.dto.response.SearchFoodResponse;
 import com.fit.nufit.food.exception.NoSuchFoodException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -39,7 +40,7 @@ public interface FoodRepository extends JpaRepository<Food, Long> {
             "ELSE 4 END, f.name ASC")
     List<Food> getFoodsByName(String searchWord, Pageable pageable);
 
-    @Query("SELECT f.name " +
+    @Query("SELECT new com.fit.nufit.food.dto.response.SearchFoodResponse(f.id, f.name) " +
             "FROM Food f " +
             "WHERE f.name LIKE '%'||:searchWord||'%' " +
             "ORDER BY " +
@@ -47,5 +48,5 @@ public interface FoodRepository extends JpaRepository<Food, Long> {
             "WHEN f.name LIKE :searchWord||'%' THEN 2 " +
             "WHEN f.name LIKE '%'||:searchWord THEN 3 " +
             "ELSE 4 END, f.name ASC")
-    List<String> getFoodNamesBySearchWord(String searchWord, Pageable pageable);
+    List<SearchFoodResponse> getFoodNamesBySearchWord(String searchWord, Pageable pageable);
 }

@@ -6,6 +6,7 @@ import com.fit.nufit.food.dto.request.FoodCreateRequest;
 import com.fit.nufit.food.dto.request.FoodNutrientUpdateRequest;
 import com.fit.nufit.food.dto.response.FoodResponse;
 import com.fit.nufit.food.dto.response.NutrientDetailResponse;
+import com.fit.nufit.food.dto.response.SearchFoodResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,8 +34,8 @@ public class FoodController {
     }
 
     @GetMapping("/names")
-    public ResponseEntity<List<String>> findFoodNamesBySearchWord(@RequestParam("q") String searchWord) {
-        List<String> response = foodService.getFoodNamesBySearchWord(searchWord);
+    public ResponseEntity<List<SearchFoodResponse>> findFoodNamesBySearchWord(@RequestParam("q") String searchWord) {
+        List<SearchFoodResponse> response = foodService.getFoodNamesBySearchWord(searchWord);
         return ResponseEntity.ok(response);
     }
 

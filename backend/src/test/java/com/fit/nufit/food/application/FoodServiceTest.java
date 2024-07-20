@@ -5,6 +5,7 @@ import com.fit.nufit.food.dto.request.FoodCreateRequest;
 import com.fit.nufit.food.dto.request.FoodNutrientCreateRequest;
 import com.fit.nufit.food.dto.response.FoodResponse;
 import com.fit.nufit.food.dto.response.NutrientDetailResponse;
+import com.fit.nufit.food.dto.response.SearchFoodResponse;
 import com.fit.nufit.food.exception.NoSuchFoodException;
 import com.fit.nufit.meal.domain.*;
 import com.fit.nufit.member.domain.Member;
@@ -147,12 +148,12 @@ class FoodServiceTest {
         foodRepository.save(new Food("파스타", 1, FoodUnit.G, "오뚜기", FoodType.from("brand"), 500));
 
         // when
-        List<String> response = foodService.getFoodNamesBySearchWord("커피");
+        List<SearchFoodResponse> response = foodService.getFoodNamesBySearchWord("커피");
 
         // then
         assertThat(response.size()).isEqualTo(6);
-        assertThat(response.get(0)).isEqualTo("커피");
-        assertThat(response.get(5)).isEqualTo("강커피콩");
+        assertThat(response.get(0).getName()).isEqualTo("커피");
+        assertThat(response.get(5).getName()).isEqualTo("강커피콩");
     }
 
     @Test
